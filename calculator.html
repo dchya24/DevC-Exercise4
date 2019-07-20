@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Kalkulator</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container">
+          <a class="navbar-brand" href="#">My Apps</a>
+          <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+              aria-expanded="false" aria-label="Toggle navigation"></button>
+          <div class="collapse navbar-collapse" id="collapsibleNavId">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="planets.html">Planets</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="#">Calculator <span class="sr-only">(current)</span></a>
+                  </li>
+              </ul>
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="about-me.html">About Me</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <div class="row mt-2">
+    <div class="col-4 offset-2">
+        <div class="card text-left">
+          <div class="card-header text-light bg-dark">
+            <h4 class="card-title">Kalkulator</h4>
+          </div>
+          <div class="card-body">
+            <!-- <div id="angka">
+            </div> -->
+            <table class="table">
+                <tr>
+                  <td> Angka Pertama</td>
+                  <td>
+                    <input type="text" id="angka_1" class="form-control">
+                  </td>
+                </tr>
+                <tr>
+                  <td> Angka Kedua</td>
+                  <td>
+                    <input type="text" id="angka_2" class="form-control">
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="text-center">
+                    <button type="button" class="btn btn-sm btn-outline-primary" onClick="hitung('tambah')">+</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onClick="hitung('kurang')">-</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onClick="hitung('kali')">*</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary" onClick="hitung('bagi')">/</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" id="hasil" class="text-center">
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+    </div>
+    
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header text-white bg-dark">
+          <h5 class="card-title">Kalkulator</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div id="output"> Output : </div>
+            <div id="layar" class="bg-light w-100 border my-1 p-1 text-right align-bottom" style="height: 32px;">
+            </div>
+            <div class="col-8 row" id="angka">
+            </div>
+            <div class="col-4 row p-1">
+              <div class="col-6 mb-1">
+                <button class="btn btn-outline-primary" onclick="oprLayar('+')"> + </button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-outline-primary" onclick="oprLayar('-')"> - </button>
+              </div>
+              <div class="col-6 mb-1">
+                <button class="btn btn-outline-primary" onclick="oprLayar('*')"> * </button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-outline-primary" onclick="oprLayar('/')"> / </button>
+              </div>
+              <div class="col-12 mb-1">
+                <button class="btn btn-block btn-primary" onclick="hasilLayar()"> Hasil </button>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-block btn-outline-danger" onclick="resetLayar()"> Reset </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+
+        function hitung(opr){
+          var angka1 = parseInt(document.getElementById("angka_1").value);
+          var angka2 = parseInt(document.getElementById("angka_2").value);
+          var hasil;
+
+
+          if(opr == 'tambah'){
+            hasil = angka1 + angka2;
+          }else if(opr == 'kurang'){
+            hasil = angka1 - angka2;
+          }else if(opr == 'kali'){
+            hasil = angka1 * angka2;
+          }else if(opr == 'bagi'){
+            if(angka1 == 0|| angka2 == 0){
+              hasil = "tidak boleh 0"
+            }else{
+              hasil = angka1 / angka2;
+            }
+          }
+
+          document.getElementById("hasil").innerHTML = hasil
+        }
+
+        function reset(){
+          document.getElementById("angka_1").value = ''
+          document.getElementById("angka_2").value = ''
+          document.getElementById("hasil").innerHTML = "";
+        }
+
+        var stringText = '';
+
+        var array = [];
+        var render = "";
+        for(var i = 0; i <= 9; i++){
+          // render += `<div class='col-4 p-1'> <button class='btn btn-primary' onClick="addAngka(${i})"> ${i} </button> </div>`
+          render += `<div class='col-3 m-1 btn btn-primary' onClick="addAngka('${i}')">${i}</div>`
+        }
+
+        document.getElementById('angka').innerHTML = render;
+
+        function addAngka(angka){
+          console.log(angka);
+          document.getElementById("layar").innerHTML += angka;         
+          // array.push.angka 
+        }
+
+        function resetLayar(){
+          array = []
+          document.getElementById("layar").innerHTML = ""; 
+          document.getElementById("output").innerHTML = "Output : ";
+        }
+
+        function oprLayar(attr){
+          var num =document.getElementById("layar").innerHTML.trim();
+          array.push(num)
+          array.push(attr);
+          document.getElementById("layar").innerHTML = "";
+          stringText = array[0] + ' ' + array[1];
+          document.getElementById("output").innerHTML += stringText;
+        }
+
+        function hasilLayar(){
+          array.push(document.getElementById('layar').innerHTML.trim());
+          var hasil; 
+          var opr = array[1]
+          var angka1 = parseInt(array[0]);
+          var angka2 = parseInt(array[2]);
+
+          if(opr == '+'){
+            hasil = angka1 + angka2;
+          }else if(opr == '-'){
+            hasil = angka1 - angka2;
+          }else if(opr == '*'){
+            hasil = angka1 * angka2;
+          }else if(opr == '/'){
+            if(angka1 == 0|| angka2 == 0){
+              alert('tidak boleh 0');
+              document.getElementById("output").innerHTML = "Output : Tidak boleh 0!!";
+              hasil = ''
+              return false;
+            }else{
+              hasil = angka1 / angka2;
+            }
+          }
+          document.getElementById("layar").innerHTML = hasil;
+          document.getElementById("output").innerHTML += ` ${angka2}`;
+          array = []
+
+        }
+
+
+</script>
+</body>
+</html>
